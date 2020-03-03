@@ -1,0 +1,36 @@
+---
+title: "sampling-exercise"
+author: "Gabe Cederberg"
+date: "3/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(googlesheets4)
+library(fs)
+library(janitor)
+library(tidyverse)
+```
+
+```{r}
+
+sheets_deauth()
+
+x <- read_sheet(ss = "14HmwN2cEVAJHupuehCuLdwG9BXtR3COrxDgaaylLhkA") %>% 
+  clean_names()
+
+y <- x %>% 
+  filter(!is.na(percent_white))
+
+y %>% 
+  arrange(desc(percent_red))
+
+ggplot(y, aes(percent_red)) + geom_bar(binwidth = 0.04)
+
+
+
+# ifelse(percent_red > 1, /)
+```
+
